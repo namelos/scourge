@@ -14,11 +14,17 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'public'),
-    historyApiFallback: true,
     open: true,
     index: 'index.html',
     proxy: {
-      '/api': 'http://localhost:9000'
+      '/': {
+        target: 'http://localhost:9000',
+        bypass: (req, res, proxyOptions) => {
+          if (req.headers.accept && req.headers.accept.indexOf('html') !== -1) {
+            return '/index.html'
+          }
+        }
+      }
     }
   }
 }
