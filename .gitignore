@@ -17,4 +17,5 @@ dist
 node_modules
 *.log
 
-.iea
+.idea
+*.iml
